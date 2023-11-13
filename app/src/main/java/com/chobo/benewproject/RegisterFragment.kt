@@ -35,8 +35,16 @@ class RegisterFragment : Fragment() {
         btn_next.setOnClickListener {
             if (et_password.text.toString() == et_passwordCheck.text.toString() &&
                 et_id.text.isNotEmpty() && et_password.text.isNotEmpty()) {
+
+                val bundle = Bundle()
+                bundle.putString("account", et_id.text.toString())
+                bundle.putString("password", et_password.text.toString())
+
+                val registerInfoFragment = RegisterInfoFragment()
+                registerInfoFragment.arguments = bundle
+
                 val fragmentTransaction = childFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.flay_register_next, RegisterInfoFragment())
+                fragmentTransaction.replace(R.id.flay_register_next, registerInfoFragment)
                 fragmentTransaction.commit()
             } else {
                 // 비밀번호 재확인 요청

@@ -45,6 +45,9 @@ class RegisterInfoFragment : Fragment() {
         spn_gender = view.findViewById(R.id.spn_registerInfo_gender)
         spn_major = view.findViewById(R.id.spn_registerInfo_major)
 
+        val account = arguments?.getString("account")!!
+        val password = arguments?.getString("password")!!
+
         et_phone.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
         btn_birthdate.setOnClickListener {
@@ -55,12 +58,12 @@ class RegisterInfoFragment : Fragment() {
 
             var name = et_name.text.toString()
 
-/*            if(name.isNotEmpty()){
+            if(name.isNotEmpty()){
 
-*//*                val retrofit = Retrofit.Builder()
+                val retrofit = Retrofit.Builder()
                     .baseUrl("http://ec2-3-39-251-72.ap-northeast-2.compute.amazonaws.com/")
                     .addConverterFactory(GsonConverterFactory.create())
-                    .build()*//*
+                    .build()
                 //http://ec2-3-39-251-72.ap-northeast-2.compute.amazonaws.com/ 주소
 
                 val apiService = retrofit.create(DoRegister::class.java)
@@ -72,8 +75,11 @@ class RegisterInfoFragment : Fragment() {
                 call.enqueue(object : Callback<Boolean> {
                     override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
                         if (response.isSuccessful) {
-                        } else {
-
+                            val fragmentTransaction = childFragmentManager.beginTransaction()
+                            fragmentTransaction.replace(R.id.flay_register_next, LoginFragment())
+                            fragmentTransaction.commit()
+                        } else{
+                            
                         }
                     }
 
@@ -83,11 +89,7 @@ class RegisterInfoFragment : Fragment() {
 
                 })
 
-            }*/
-
-            val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flay_registerInfo_gologin, LoginFragment())
-            fragmentTransaction.commit()
+            }
         }
         return view
     }
