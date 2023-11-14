@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,15 +77,15 @@ class RegisterInfoFragment : Fragment() {
                     override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
                         if (response.isSuccessful) {
                             val fragmentTransaction = childFragmentManager.beginTransaction()
-                            fragmentTransaction.replace(R.id.flay_register_next, LoginFragment())
+                            fragmentTransaction.replace(R.id.flay_registerInfo_gologin, LoginFragment())
                             fragmentTransaction.commit()
                         } else{
-                            
+                            Log.e("RegisterInfoFragment", "Response unsuccessful: ${response.message()}")
                         }
                     }
 
                     override fun onFailure(call: Call<Boolean>, t: Throwable) {
-
+                        Log.e("RegisterInfoFragment", "Request failed: ${t.message}")
                     }
 
                 })
