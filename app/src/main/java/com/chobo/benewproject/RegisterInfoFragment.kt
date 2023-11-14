@@ -74,7 +74,7 @@ class RegisterInfoFragment : Fragment() {
 
                 val apiService = retrofit.create(DoRegister::class.java)
 
-                val request = RegisterData(account, password, name, gender, birthdate, email, major, phoneNumber)
+                val request = RegisterData(account, password, name, gender, birthdate, email, major, phoneNumber) //테스트 아직
 
                 val call = apiService.signup(request)
 
