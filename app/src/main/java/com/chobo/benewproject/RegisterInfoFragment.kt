@@ -58,8 +58,13 @@ class RegisterInfoFragment : Fragment() {
         btn_join.setOnClickListener {
 
             var name = et_name.text.toString()
+            var gender = spn_gender.selectedItem.toString()
+            var birthdate = btn_birthdate.text.toString()
+            var email = et_email.text.toString()
+            var major = spn_major.selectedItem.toString()
+            var phoneNumber = et_phone.text.toString()
 
-            if(name.isNotEmpty()){
+            if(name.isNotEmpty() && birthdate.isNotEmpty() && email.isNotEmpty() && phoneNumber.length == 14){
 
                 val retrofit = Retrofit.Builder()
                     .baseUrl("http://ec2-3-39-251-72.ap-northeast-2.compute.amazonaws.com/")
@@ -69,7 +74,7 @@ class RegisterInfoFragment : Fragment() {
 
                 val apiService = retrofit.create(DoRegister::class.java)
 
-                val request = RegisterData(account, password, name)
+                val request = RegisterData(account, password, name, gender, birthdate, email, major, phoneNumber)
 
                 val call = apiService.signup(request)
 
